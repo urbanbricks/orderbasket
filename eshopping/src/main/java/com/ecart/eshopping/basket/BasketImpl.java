@@ -18,6 +18,8 @@ public class BasketImpl implements Basket {
 	}
 
 	public boolean addBasketItem(BasketItem item) throws ValidationException {
+		if (item == null)
+			throw new ValidationException();
 		return items.add(item);
 	}
 
