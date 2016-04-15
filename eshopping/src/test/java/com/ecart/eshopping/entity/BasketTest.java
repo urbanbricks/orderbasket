@@ -25,7 +25,10 @@ public class BasketTest {
 
 		basket = new Basket();
 	}
-
+	
+	/**
+	 * Test all added items are available in the basket
+	 */
 	@Test
 	public void testBasketaddedItems() {
 		basket.addBasketItem(bananas);
@@ -35,5 +38,5 @@ public class BasketTest {
 		Assert.assertTrue(basket.getListItems().contains(oranges));
 		Assert.assertTrue(basket.getListItems().contains(apples));
 	}
-
+	
 }

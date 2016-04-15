@@ -18,7 +18,7 @@ public class BasketManagerImpl implements BasketManager {
      * @return
      */	
 	
-	public BigDecimal computeBasketTotal(Basket basket) throws ValidationException {
+	public BigDecimal computeBasketTotal(Basket basket) {
 		BigDecimal totalBasketPrice = BigDecimal.ZERO;
 		
 		if(basket == null)
