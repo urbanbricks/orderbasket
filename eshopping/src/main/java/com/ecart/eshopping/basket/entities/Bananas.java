@@ -22,7 +22,7 @@ public class Bananas implements BasketItem {
 		return name;
 	}
 
-	public void setItemName(String name) {
+	public void setItemName(final String name) {
 		this.name = name;
 		
 	}
@@ -31,7 +31,7 @@ public class Bananas implements BasketItem {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(final BigDecimal price) {
 		this.price = price;
 	}
 
@@ -39,7 +39,7 @@ public class Bananas implements BasketItem {
 		return this.quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(final int quantity) {
 		this.quantity = quantity;		
 	}
 

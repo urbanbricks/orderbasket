@@ -4,23 +4,25 @@ import java.math.BigDecimal;
 
 /**
  * Apples entity
- * 
+ * @author suresh
  *
  */
 public class Apples implements BasketItem {
 	
 	String name = "Apples";
+	
 	// TODO prices and quantity are hardcoded for test purpose.
 	// TODO in production implementation this will be populated from database table or property files
-	private BigDecimal price = BigDecimal.valueOf(0.55);
-	private int quantity = 4;
+	
+	BigDecimal price = BigDecimal.valueOf(0.55);
+	int quantity = 4;
 
 	public String getItemName() {
 		
 		return name;
 	}
 
-	public void setItemName(final String name) {
+	public void setItemName(String name) {
 		this.name = name;
 		
 	}
@@ -29,7 +31,7 @@ public class Apples implements BasketItem {
 		return price;
 	}
 
-	public void setPrice(final BigDecimal price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
@@ -37,8 +39,7 @@ public class Apples implements BasketItem {
 		return this.quantity;
 	}
 
-	public void setQuantity(final int quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;		
 	}
-
 }

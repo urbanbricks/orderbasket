@@ -5,13 +5,15 @@ import java.math.BigDecimal;
 import com.ecart.eshopping.basket.entities.Basket;
 import com.ecart.eshopping.exception.ValidationException;
 
+/**
+ * @author selvaps
+ *
+ */
 public interface BasketManager {
 	
     /**
-     * 
-     * @author Selvaps 
-     * compute basket total
-     * @param basketID
+     * Compute total price for the entire basket items.
+     * @param basket
      * @return
      * @throws ValidationException
      */

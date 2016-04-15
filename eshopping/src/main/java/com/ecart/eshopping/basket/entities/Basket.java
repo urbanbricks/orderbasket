@@ -27,7 +27,7 @@ public class Basket {
 	/**
 	 * Set basket id
 	 */
-	public void setBasketID(long basketID) {
+	public void setBasketID(final long basketID) {
 		this.basketID = basketID;
 		
 	}
@@ -39,7 +39,7 @@ public class Basket {
 	 * @throws ValidationException
 	 */
 	
-	public boolean addBasketItem(BasketItem item) {
+	public boolean addBasketItem(final BasketItem item) {
 		return basketItems.add(item);
 	}
 	
@@ -49,7 +49,7 @@ public class Basket {
 	 * @return 
 	 * @throws ValidationException
 	 */
-	public boolean addBasketItem(List<BasketItem> items) {
+	public boolean addBasketItems(final List<BasketItem> items) {
 		return basketItems.addAll(items);
 	}
 

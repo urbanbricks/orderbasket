@@ -19,7 +19,7 @@ public interface BasketItem {
 	 * Set Item name
 	 * @param name
 	 */
-	public void setItemName(String name);
+	public void setItemName(final String name);
 	
 	/**
 	 * Get item price
@@ -31,7 +31,7 @@ public interface BasketItem {
 	 * Set item price
 	 * @param price
 	 */
-	public void setPrice(BigDecimal price);
+	public void setPrice(final BigDecimal price);
 	
 	/**
 	 * Get Quantity of items in this line item 
@@ -42,8 +42,5 @@ public interface BasketItem {
 	/**
 	 * Set Quantity of items in this line item
 	 */
-	public void setQuantity(int quantity);
-	
-	
-
+	public void setQuantity(final int quantity);
 }
