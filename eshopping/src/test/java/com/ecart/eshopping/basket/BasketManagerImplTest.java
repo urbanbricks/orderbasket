@@ -17,22 +17,19 @@ import com.ecart.eshopping.basket.entities.Oranges;
 import com.ecart.eshopping.exception.ValidationException;
 
 public class BasketManagerImplTest {
-	
-	//some fruits
+
+	// some fruits
 	BasketItem bananas, oranges, apples;
-	
+
 	Basket basket;
+
 	@Before
 	public void setUp() throws Exception {
 		bananas = new Bananas();
 		oranges = new Apples();
 		apples = new Oranges();
-		
-		basket = new Basket();
-	}
 
-	@After
-	public void tearDown() throws Exception {
+		basket = new Basket();
 	}
 
 	@Test
@@ -42,15 +39,16 @@ public class BasketManagerImplTest {
 			basket.addBasketItem(bananas);
 			basket.addBasketItem(oranges);
 			basket.addBasketItem(apples);
-			BigDecimal basketTotal = basketManagerImpl.computeBasketTotal(basket); 
-			Assert.assertEquals(8.58, basketTotal.doubleValue(), 0);basketManagerImpl.computeBasketTotal(basket);
+			BigDecimal basketTotal = basketManagerImpl.computeBasketTotal(basket);
+			Assert.assertEquals(8.58, basketTotal.doubleValue(), 0);
+			basketManagerImpl.computeBasketTotal(basket);
 		} catch (ValidationException e) {
 			fail(" Test failed due to Validation exception ");
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testCalculateBasketTotalWithAmendedPrice() {
 		bananas.setPrice(BigDecimal.valueOf(1));
@@ -61,43 +59,44 @@ public class BasketManagerImplTest {
 			basket.addBasketItem(bananas);
 			basket.addBasketItem(oranges);
 			basket.addBasketItem(apples);
-			BigDecimal basketTotal = basketManagerImpl.computeBasketTotal(basket); 
-			Assert.assertEquals(12, basketTotal.doubleValue(), 0);basketManagerImpl.computeBasketTotal(basket);
+			BigDecimal basketTotal = basketManagerImpl.computeBasketTotal(basket);
+			Assert.assertEquals(12, basketTotal.doubleValue(), 0);
+			basketManagerImpl.computeBasketTotal(basket);
 		} catch (ValidationException e) {
 			fail(" Test failed due to Validation exception ");
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testBasketWithNoItem() {
 		BasketManagerImpl basketManagerImpl = new BasketManagerImpl();
-		BigDecimal basketTotal = basketManagerImpl.computeBasketTotal(basket); 
+		BigDecimal basketTotal = basketManagerImpl.computeBasketTotal(basket);
 		Assert.assertEquals(0, basketTotal.doubleValue(), 0);
 	}
-	
-	@Test(expected=ValidationException.class)
+
+	@Test(expected = ValidationException.class)
 	public void testNullBasket() {
 		BasketManagerImpl basketManagerImpl = new BasketManagerImpl();
-		basketManagerImpl.computeBasketTotal(null); 
+		basketManagerImpl.computeBasketTotal(null);
 
 	}
-	
-	@Test(expected=ValidationException.class)
+
+	@Test(expected = ValidationException.class)
 	public void testNullItemInBasket() {
 		BasketManagerImpl basketManagerImpl = new BasketManagerImpl();
-			basket.addBasketItem(bananas);
-			basket.addBasketItem(null);
-			basketManagerImpl.computeBasketTotal(basket); 
+		basket.addBasketItem(bananas);
+		basket.addBasketItem(null);
+		basketManagerImpl.computeBasketTotal(basket);
 	}
-	
-	@Test(expected=ValidationException.class)
+
+	@Test(expected = ValidationException.class)
 	public void testNullPriceForItem() {
 		oranges.setPrice(null);
 		BasketManagerImpl basketManagerImpl = new BasketManagerImpl();
-			basket.addBasketItem(bananas);
-			basket.addBasketItem(oranges);
-			basketManagerImpl.computeBasketTotal(basket); 
+		basket.addBasketItem(bananas);
+		basket.addBasketItem(oranges);
+		basketManagerImpl.computeBasketTotal(basket);
 	}
 }
