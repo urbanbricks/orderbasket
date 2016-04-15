@@ -9,6 +9,8 @@ import com.ecart.eshopping.exception.ValidationException;
 /**
  * This class compute total cost of all items in the given basket
  * @author suresh
+ * 
+ * @see some other stuff....
  *
  */
 public class BasketManagerImpl implements BasketManager {
