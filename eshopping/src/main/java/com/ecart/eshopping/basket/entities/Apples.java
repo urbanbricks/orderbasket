@@ -3,7 +3,7 @@ package com.ecart.eshopping.basket.entities;
 import java.math.BigDecimal;
 
 /**
- * Banana entity
+ * Apples entity
  * @author suresh
  *
  */

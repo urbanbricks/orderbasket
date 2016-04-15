@@ -4,9 +4,7 @@ import static org.junit.Assert.fail;
 
 import java.math.BigDecimal;
 
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.ecart.eshopping.basket.entities.Apples;
@@ -17,14 +15,6 @@ import com.ecart.eshopping.basket.entities.Oranges;
 import com.ecart.eshopping.exception.ValidationException;
 
 public class BasketManagerImplTest {
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
 
 	@Test
 	public void testCalculateBasketTotalWithDefaultPrice() {
@@ -69,15 +59,24 @@ public class BasketManagerImplTest {
 		
 	}
 	
+	@Test
+	public void testBasketWithNoItem() {
+		BasketManagerImpl basketManagerImpl = new BasketManagerImpl();
+		Basket basket = new Basket();
+		basketManagerImpl.computeBasketTotal(basket); 
+		BigDecimal basketTotal = basketManagerImpl.computeBasketTotal(basket); 
+		Assert.assertEquals(0, basketTotal.doubleValue(), 0);basketManagerImpl.computeBasketTotal(basket);
+	}
+	
 	@Test(expected=ValidationException.class)
-	public void testNullBasket() throws ValidationException {
+	public void testNullBasket() {
 		BasketManagerImpl basketManagerImpl = new BasketManagerImpl();
 		basketManagerImpl.computeBasketTotal(null); 
 
 	}
 	
 	@Test(expected=ValidationException.class)
-	public void testNullItemInBasket() throws ValidationException {
+	public void testNullItemInBasket() {
 		BasketItem bananas = new Bananas();
 		Basket basket = new Basket();
 		BasketManagerImpl basketManagerImpl = new BasketManagerImpl();
@@ -87,7 +86,7 @@ public class BasketManagerImplTest {
 	}
 	
 	@Test(expected=ValidationException.class)
-	public void testNullPriceForItem() throws ValidationException {
+	public void testNullPriceForItem() {
 		BasketItem bananas = new Bananas();
 		BasketItem oranges = new Apples();
 		oranges.setPrice(null);

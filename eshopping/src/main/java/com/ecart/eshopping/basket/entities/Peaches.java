@@ -3,15 +3,15 @@ package com.ecart.eshopping.basket.entities;
 import java.math.BigDecimal;
 
 /**
- * Oranges entity
+ * Peaches entity
  * @author suresh
  *
  */
-public class Oranges implements BasketItem {
+public class Peaches implements BasketItem {
 	
-	String name = "Oranges";
-	BigDecimal price = BigDecimal.valueOf(0.40);
-	int quantity = 6;
+	String name = "Peaches";
+	BigDecimal price = BigDecimal.valueOf(0.55);
+	int quantity = 4;
 
 	public String getItemName() {
 		
