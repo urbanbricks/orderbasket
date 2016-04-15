@@ -8,6 +8,8 @@ import com.ecart.eshopping.exception.ValidationException;
 public interface BasketManager {
 	
     /**
+     * 
+     * @author Selvaps 
      * compute basket total
      * @param basketID
      * @return
