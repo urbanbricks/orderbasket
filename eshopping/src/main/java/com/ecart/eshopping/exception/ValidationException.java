@@ -1,5 +1,6 @@
 package com.ecart.eshopping.exception;
 
+@SuppressWarnings("serial")
 public class ValidationException extends Exception {
 	
 	public ValidationException(){};
