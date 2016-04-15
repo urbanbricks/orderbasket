@@ -49,7 +49,7 @@ public class BasketItem {
 	public void setItemName(String name) throws ValidationException {
 		
 		if (name == null)
-			throw new ValidationException();
+			throw new ValidationException("Name is null");
 		
 		this.itemName = name;
 		
@@ -70,7 +70,7 @@ public class BasketItem {
      */
 	public void setItemPrice(double itemPrice) throws ValidationException {
 		if (itemPrice < 0)
-			throw new ValidationException();
+			throw new ValidationException("Price is negative");
 		
 		this.itemPrice = itemPrice;
 		

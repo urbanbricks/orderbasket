@@ -11,7 +11,7 @@ public interface BasketDAO {
 	 * @return
 	 * @throws DataBaseException
 	 */
-	public Basket create() throws DataBaseException;
+	public Basket create(Basket basket) throws DataBaseException;
 	
 	/**	Update basket and line items tables in the database. 
 	 * 

@@ -1,4 +1,4 @@
-package com.ecart.eshopping.basket;
+package com.ecart.eshopping.entity;
 
 import static org.junit.Assert.fail;
 

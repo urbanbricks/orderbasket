@@ -49,7 +49,7 @@ public class BasketManagerImpl implements BasketManager {
      * @throws ValidationException
      * @throws DataBaseException
      */
-	public double getBasketTotal(long basketID) throws ValidationException, DataBaseException {
+	public double getBasketTotal(long basketID) throws DataBaseException {
 		Basket basket = basketDAO.load(basketID);
 		return basket.getBasketTotal();
 	}
@@ -60,7 +60,8 @@ public class BasketManagerImpl implements BasketManager {
 	 * @throws DataBaseException
 	 */
 	public long newBasket() throws DataBaseException {
-		Basket basket = basketDAO.create();
+		Basket basket = shoppingfactory.getNewBasket();
+		basket = basketDAO.create(basket);
 		return basket.getBasketID();
 		
 	}
