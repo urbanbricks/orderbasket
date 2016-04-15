@@ -87,7 +87,7 @@ public class BasketManagerImplTest {
 	}
 	
 	@Test(expected=ValidationException.class)
-	public void testNullPriceItem() throws ValidationException {
+	public void testNullPriceForItem() throws ValidationException {
 		BasketItem bananas = new Bananas();
 		BasketItem oranges = new Apples();
 		oranges.setPrice(null);
