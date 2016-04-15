@@ -1,11 +1,17 @@
 package com.ecart.eshopping.basket;
 
+import com.ecart.eshopping.basket.entities.Basket;
 import com.ecart.eshopping.basket.entities.BasketItem;
 import com.ecart.eshopping.dao.BasketDAO;
 import com.ecart.eshopping.exception.DataBaseException;
 import com.ecart.eshopping.exception.ValidationException;
 import com.ecart.eshopping.factory.ShoppingFactory;
 
+/**
+ * This class manages basket creation and addition of items to the basket
+ * @author suresh
+ *
+ */
 public class BasketManagerImpl implements BasketManager {
 	
 	private BasketDAO basketDAO; 
@@ -29,11 +35,8 @@ public class BasketManagerImpl implements BasketManager {
      * @throws ValidationException
      * @throws DataBaseException
      */
-	public boolean addItemTobasket(String basketID, String itemName, int quantity, long itemPrice) throws ValidationException, DataBaseException {
-		BasketItem basketItem = shoppingfactory.getNewBasketItem();
-		basketItem.setItemName(itemName);
-		basketItem.setItemPrice(itemPrice);
-		basketItem.setItemQuantity(quantity);
+	public boolean addItemTobasket(long basketID, String itemName, int quantity, double itemPrice) throws ValidationException, DataBaseException {
+		BasketItem basketItem = createBasketItem(basketID, itemName,quantity,itemPrice);
 		Basket basket = basketDAO.load(basketID);
 		basket.addBasketItem(basketItem);
 		return basketDAO.update(basket);
@@ -46,21 +49,37 @@ public class BasketManagerImpl implements BasketManager {
      * @throws ValidationException
      * @throws DataBaseException
      */
-	public long getBasketTotal(String basketID) throws ValidationException, DataBaseException {
+	public double getBasketTotal(long basketID) throws ValidationException, DataBaseException {
 		Basket basket = basketDAO.load(basketID);
 		return basket.getBasketTotal();
 	}
 	
 	/**
-	 * This method creates new basket with a unique basket id in database and return the basket id
+	 * This method creates new basket with a unique basket id in database table (auto generated id) and return the basket id
 	 * @return
 	 * @throws DataBaseException
 	 */
-	public String newBasket() throws DataBaseException {
-		Basket basket = shoppingfactory.getNewBasket();
-		basket = basketDAO.create(basket);
+	public long newBasket() throws DataBaseException {
+		Basket basket = basketDAO.create();
 		return basket.getBasketID();
 		
+	}
+	
+	/**
+	 * Creates basket item and populate its attributes
+	 * @param itemName
+	 * @param quantity
+	 * @param itemPrice
+	 * @return
+	 * @throws ValidationException
+	 */
+	private BasketItem createBasketItem(long basketID, String itemName, int quantity, double itemPrice) throws ValidationException {
+		BasketItem basketItem = shoppingfactory.getNewBasketItem();
+		basketItem.setItemName(itemName);
+		basketItem.setItemPrice(itemPrice);
+		basketItem.setItemQuantity(quantity);
+		basketItem.setBasketID(basketID);
+		return basketItem;
 	}
 	
 }

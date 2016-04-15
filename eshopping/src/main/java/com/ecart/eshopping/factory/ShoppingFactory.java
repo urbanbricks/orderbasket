@@ -1,9 +1,7 @@
 package com.ecart.eshopping.factory;
 
-import com.ecart.eshopping.basket.Basket;
-import com.ecart.eshopping.basket.BasketImpl;
+import com.ecart.eshopping.basket.entities.Basket;
 import com.ecart.eshopping.basket.entities.BasketItem;
-import com.ecart.eshopping.basket.entities.BasketItemImpl;
 
 public class ShoppingFactory {
 	
@@ -13,12 +11,12 @@ public class ShoppingFactory {
 	
 	public Basket getNewBasket(){
 		
-		return new BasketImpl();
+		return new Basket();
 		
 	}
 	
 	public BasketItem getNewBasketItem(){
-		return new BasketItemImpl();
+		return new BasketItem();
 	}
 	
 

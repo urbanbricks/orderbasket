@@ -1,6 +1,6 @@
 package com.ecart.eshopping.dao;
 
-import com.ecart.eshopping.basket.Basket;
+import com.ecart.eshopping.basket.entities.Basket;
 import com.ecart.eshopping.exception.DataBaseException;
 
 public class BasketDAOImpl implements BasketDAO {
@@ -11,7 +11,7 @@ public class BasketDAOImpl implements BasketDAO {
 	 * @return
 	 * @throws DataBaseException
 	 */
-	public Basket create(Basket basket) throws DataBaseException {
+	public Basket create() throws DataBaseException {
 		// TODO Need to implement the code
 		return null;
 	}
@@ -33,7 +33,7 @@ public class BasketDAOImpl implements BasketDAO {
 	 * @return
 	 * @throws DataBaseException
 	 */
-	public Basket load(String basketID) throws DataBaseException {
+	public Basket load(long basketID) throws DataBaseException {
 		// TODO Need to implement the code
 		return null;
 	}

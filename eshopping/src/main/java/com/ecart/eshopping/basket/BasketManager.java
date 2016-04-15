@@ -10,7 +10,7 @@ public interface BasketManager {
 	 * @return
 	 * @throws DataBaseException
 	 */
-    public String newBasket() throws DataBaseException;
+    public long newBasket() throws DataBaseException;
     
     /**
      * Creates new basket item for the given item details. 
@@ -24,7 +24,7 @@ public interface BasketManager {
      * @throws ValidationException
      * @throws DataBaseException
      */
-    public boolean addItemTobasket(String basketID, String itemName, int quantity, long itemPrice) throws ValidationException, DataBaseException;
+    public boolean addItemTobasket(long basketID, String itemName, int quantity, double itemPrice) throws ValidationException, DataBaseException;
     
     /**
      * Load the basket from database and get the basket total
@@ -33,6 +33,6 @@ public interface BasketManager {
      * @throws ValidationException
      * @throws DataBaseException
      */
-    public long getBasketTotal(String basketID) throws ValidationException, DataBaseException;
+    public double getBasketTotal(long basketID) throws ValidationException, DataBaseException;
 
 }

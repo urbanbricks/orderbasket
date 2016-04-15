@@ -1,6 +1,6 @@
 package com.ecart.eshopping.dao;
 
-import com.ecart.eshopping.basket.Basket;
+import com.ecart.eshopping.basket.entities.Basket;
 import com.ecart.eshopping.exception.DataBaseException;
 
 public interface BasketDAO {
@@ -11,7 +11,7 @@ public interface BasketDAO {
 	 * @return
 	 * @throws DataBaseException
 	 */
-	public Basket create(Basket basket) throws DataBaseException;
+	public Basket create() throws DataBaseException;
 	
 	/**	Update basket and line items tables in the database. 
 	 * 
@@ -28,6 +28,6 @@ public interface BasketDAO {
 	 * @throws DataBaseException
 	 */
 	 
-	public Basket load(String basketID) throws DataBaseException;
+	public Basket load(long basketID) throws DataBaseException;
 	
 }

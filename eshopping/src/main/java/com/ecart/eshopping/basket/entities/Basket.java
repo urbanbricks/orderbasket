@@ -1,22 +1,38 @@
-package com.ecart.eshopping.basket;
+package com.ecart.eshopping.basket.entities;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ecart.eshopping.basket.entities.BasketItem;
 import com.ecart.eshopping.exception.ValidationException;
 
-public class BasketImpl implements Basket {
+/**
+ * Basket Entity class
+ * @author suresh
+ *
+ */
+
+//TODO Need to add JPA annotations
+public class Basket {
 	
 	protected List<BasketItem> items = new ArrayList<BasketItem>();
-	protected String basketID = null;
+	
+	//	TODO Auto generate ID. Need to add JPA annotations
+	protected long basketID;
 	
 	/**
 	 * Returns ID of this basket
 	 * @return
 	 */
-	public String getBasketID() {
+	public long getBasketID() {
 		return basketID;
+	}
+	
+	/**
+	 * set basket id
+	 */
+	public void setBasketID(long basketID) {
+		this.basketID = basketID;
+		
 	}
 	
 	/**
@@ -42,14 +58,23 @@ public class BasketImpl implements Basket {
 	}
 	
 	/**
+	 * Gets the list of items
+	 * @return
+	 */
+	public List<BasketItem> getListItems(){
+		return items;
+	}
+	
+	/**
      * Total value of the basket
      * @return
      */	
-	public long getBasketTotal() {
-		long totalPrice =0l;
+	public double getBasketTotal() {
+		double totalPrice =0d;
 		for(BasketItem basketItem : items){
 			totalPrice =+ basketItem.getItemPrice() * basketItem.getItemQuantity();
 		}
 		return totalPrice;
 	}
+
 }
