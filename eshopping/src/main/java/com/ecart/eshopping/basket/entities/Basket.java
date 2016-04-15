@@ -11,12 +11,9 @@ import com.ecart.eshopping.exception.ValidationException;
  *
  */
 
-//TODO Need to add JPA annotations
 public class Basket {
 	
 	protected List<BasketItem> items = new ArrayList<BasketItem>();
-	
-	//	TODO Auto generate ID. Need to add JPA annotations
 	protected long basketID;
 	
 	/**
@@ -28,7 +25,7 @@ public class Basket {
 	}
 	
 	/**
-	 * set basket id
+	 * Set basket id
 	 */
 	public void setBasketID(long basketID) {
 		this.basketID = basketID;
@@ -42,9 +39,7 @@ public class Basket {
 	 * @throws ValidationException
 	 */
 	
-	public boolean addBasketItem(BasketItem item) throws ValidationException {
-		if (item == null)
-			throw new ValidationException("Adding null basket Item is not allowed");
+	public boolean addBasketItem(BasketItem item) {
 		return items.add(item);
 	}
 
@@ -55,17 +50,4 @@ public class Basket {
 	public List<BasketItem> getListItems(){
 		return items;
 	}
-	
-	/**
-     * Total value of the basket
-     * @return
-     */	
-	public double getBasketTotal() {
-		double totalPrice =0d;
-		for(BasketItem basketItem : items){
-			totalPrice += (basketItem.getItemPrice() * basketItem.getItemQuantity());
-		}
-		return totalPrice;
-	}
-
 }

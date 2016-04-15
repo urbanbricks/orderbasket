@@ -1,97 +1,49 @@
 package com.ecart.eshopping.basket.entities;
 
-import com.ecart.eshopping.exception.ValidationException;
+import java.math.BigDecimal;
 
 /**
- * BasketItem entity class
+ * Basket Item entity
  * @author suresh
  *
  */
-
-//TODO Need to add JPA annotations
-public class BasketItem {
-	//	TODO Auto generate ID. Need to add JPA annotations
-	//	Composite key
-	private long basketID;
-	private String itemName;
-	
-	private int itemQuantity;
-	private double itemPrice;
+public interface BasketItem {
 	
 	/**
-	 * Gets the associated basket id
+	 * Get Item name
 	 * @return
 	 */
-	public long getBasketID() {
-		return basketID;
-	}
+	public String getItemName();
+	
 	/**
-	 * Sets the associated basket id
-	 * 
+	 * Set Item name
+	 * @param name
 	 */
-	public void setBasketID(long basketID) {
-		this.basketID = basketID;
-	}
-
+	public void setItemName(String name);
+	
 	/**
-	 * Gets the item name that is associated with the item.
+	 * Get item price
 	 * @return
 	 */
-	public String getItemName() {
-		return itemName;
-	}
+	public BigDecimal getPrice();
 	
 	/**
-     * Sets the item name that is associated with the item.
-     * @param itemName
-     * @throws ValidationException
-     */
-	public void setItemName(String name) throws ValidationException {
-		
-		if (name == null)
-			throw new ValidationException("Name is null");
-		
-		this.itemName = name;
-		
-	}
+	 * Set item price
+	 * @param price
+	 */
+	public void setPrice(BigDecimal price);
 	
 	/**
-     * Gets the price of the item.
-     * @return
-     */
-	public double getItemPrice() {
-		return itemPrice;
-	}
+	 * Get Quantity of items in this line item 
+	 * @return
+	 */
+	public int getQuantity();
 	
 	/**
-     * Sets the price of the item.
-     * @param itemPrice
-     * @throws ValidationException
-     */
-	public void setItemPrice(double itemPrice) throws ValidationException {
-		if (itemPrice < 0)
-			throw new ValidationException("Price is negative");
-		
-		this.itemPrice = itemPrice;
-		
-	}
-
-	/**
-     * Gets the quantity of the this item in the basket
-     * @return
-     */
-	public long getItemQuantity() {
-
-		return itemQuantity;
-	}
+	 * Set Quantity of items in this line item
+	 */
+	public void setQuantity(int quantity);
 	
-	/**
-     * Sets the quantity of the this item in the basket
-     * @param itemQuantity
-     * @throws ValidationException
-     */
-	public void setItemQuantity(int itemQuantity) throws ValidationException {
-		this.itemQuantity = itemQuantity;
-	}
+	
 
 }

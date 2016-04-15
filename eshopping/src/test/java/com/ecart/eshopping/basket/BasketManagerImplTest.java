@@ -3,19 +3,21 @@ package com.ecart.eshopping.basket;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.*;
 
+import java.math.BigDecimal;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 
+import com.ecart.eshopping.basket.entities.Apples;
+import com.ecart.eshopping.basket.entities.Bananas;
 import com.ecart.eshopping.basket.entities.Basket;
 import com.ecart.eshopping.basket.entities.BasketItem;
-import com.ecart.eshopping.dao.BasketDAO;
-import com.ecart.eshopping.exception.DataBaseException;
+import com.ecart.eshopping.basket.entities.Oranges;
 import com.ecart.eshopping.exception.ValidationException;
-import com.ecart.eshopping.factory.ShoppingFactory;
 
-public class testBasketManagerImpl {
+public class BasketManagerImplTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -25,7 +27,7 @@ public class testBasketManagerImpl {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
+	/*@Test
 	public void testAddItemToBasket() {
 		
 		BasketDAO basketDAOMock = mock(BasketDAO.class);
@@ -151,15 +153,16 @@ public class testBasketManagerImpl {
 		basketmanager.getBasketTotal(1);
 		
 	}
+	*/
 	
-	/**
+/*	*//**
 	 * build basket item for the given attribute
 	 * @param basketId
 	 * @param name
 	 * @param price
 	 * @param quantity
 	 * @return
-	 */
+	 *//*
 	private BasketItem createBasketItem(long basketId, String name, double price, int quantity){
 		BasketItem basketItem = new BasketItem();
 		basketItem.setBasketID(basketId);
@@ -172,6 +175,77 @@ public class testBasketManagerImpl {
 			e.printStackTrace();
 		}
 		return basketItem;
+	}*/
+	
+	@Test
+	public void testCalculateBasketTotalWithDefaultPrice() {
+		BasketItem bananas = new Bananas();
+		BasketItem oranges = new Apples();
+		BasketItem apples = new Oranges();
+		Basket basket = new Basket();
+		BasketManagerImpl basketManagerImpl = new BasketManagerImpl();
+		try {
+			basket.addBasketItem(bananas);
+			basket.addBasketItem(oranges);
+			basket.addBasketItem(apples);
+			BigDecimal basketTotal = basketManagerImpl.computeBasketTotal(basket); 
+			Assert.assertEquals(8.58, basketTotal.doubleValue(), 0);basketManagerImpl.computeBasketTotal(basket);
+		} catch (ValidationException e) {
+			fail(" Test failed due to Validation exception ");
+			e.printStackTrace();
+		}
+		
 	}
+	
+	@Test
+	public void testCalculateBasketTotalWithAmendedPrice() {
+		BasketItem bananas = new Bananas();
+		bananas.setPrice(BigDecimal.valueOf(1));
+		BasketItem oranges = new Apples();
+		oranges.setPrice(BigDecimal.valueOf(1));
+		BasketItem apples = new Oranges();
+		apples.setPrice(BigDecimal.valueOf(1));
+		Basket basket = new Basket();
+		BasketManagerImpl basketManagerImpl = new BasketManagerImpl();
+		try {
+			basket.addBasketItem(bananas);
+			basket.addBasketItem(oranges);
+			basket.addBasketItem(apples);
+			BigDecimal basketTotal = basketManagerImpl.computeBasketTotal(basket); 
+			Assert.assertEquals(12, basketTotal.doubleValue(), 0);basketManagerImpl.computeBasketTotal(basket);
+		} catch (ValidationException e) {
+			fail(" Test failed due to Validation exception ");
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@Test(expected=ValidationException.class)
+	public void testNullBasket() throws ValidationException {
+		BasketManagerImpl basketManagerImpl = new BasketManagerImpl();
+		basketManagerImpl.computeBasketTotal(null); 
 
+	}
+	
+	@Test(expected=ValidationException.class)
+	public void testNullItemInBasket() throws ValidationException {
+		BasketItem bananas = new Bananas();
+		Basket basket = new Basket();
+		BasketManagerImpl basketManagerImpl = new BasketManagerImpl();
+			basket.addBasketItem(bananas);
+			basket.addBasketItem(null);
+			basketManagerImpl.computeBasketTotal(basket); 
+	}
+	
+	@Test(expected=ValidationException.class)
+	public void testNullPriceItem() throws ValidationException {
+		BasketItem bananas = new Bananas();
+		BasketItem oranges = new Apples();
+		oranges.setPrice(null);
+		Basket basket = new Basket();
+		BasketManagerImpl basketManagerImpl = new BasketManagerImpl();
+			basket.addBasketItem(bananas);
+			basket.addBasketItem(oranges);
+			basketManagerImpl.computeBasketTotal(basket); 
+	}
 }
