@@ -1,28 +1,26 @@
 package com.ecart.eshopping.entity;
 
-import org.junit.Assert;
+import java.util.Collections;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ecart.eshopping.basket.entities.Apples;
-import com.ecart.eshopping.basket.entities.Bananas;
 import com.ecart.eshopping.basket.entities.Basket;
 import com.ecart.eshopping.basket.entities.BasketItem;
-import com.ecart.eshopping.basket.entities.Oranges;
+import com.ecart.eshopping.helper.BasketItemsHelper;
+
+import static org.junit.Assert.*;
 
 public class BasketTest {
 
-	// some fruits
-	BasketItem bananas, oranges, apples;
-
-	Basket basket;
-
+	private BasketItem bananas ; 
+	private BasketItem apples ; 
+	private BasketItem oranges ; 
+	private Basket basket ; 
+	
+	
 	@Before
 	public void setUp() throws Exception {
-		bananas = new Bananas();
-		oranges = new Apples();
-		apples = new Oranges();
-
 		basket = new Basket();
 	}
 	
@@ -30,13 +28,11 @@ public class BasketTest {
 	 * Test all added items are available in the basket
 	 */
 	@Test
-	public void testBasketaddedItems() {
-		basket.addBasketItem(bananas);
-		basket.addBasketItem(oranges);
-		basket.addBasketItem(apples);
-		Assert.assertTrue(basket.getListItems().contains(bananas));
-		Assert.assertTrue(basket.getListItems().contains(oranges));
-		Assert.assertTrue(basket.getListItems().contains(apples));
+	public void testApplesAddedToBasket() {
+		basket.addBasketItem(BasketItemsHelper.getBananas(2));
+		assertEquals(2 , basket.getItemsInBasket().size() ) ;
+		
 	}
 	
+	// More tests for each fruit . // apple, peaches ...
 }

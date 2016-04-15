@@ -10,8 +10,10 @@ import java.math.BigDecimal;
 public class Bananas implements BasketItem {
 	
 	String name = "Bananas";
-	// TODO prices and quantity are hardcoded for test purpose.
-	// TODO in production implementation this will be populated from database table or property files
+	
+	// TODO   prices and quantity are hardcoded for test purpose.
+	// TODO   in production implementation this will be populated from database table or property files
+	
 	BigDecimal price = BigDecimal.valueOf(1.99);
 	int quantity = 2;
 

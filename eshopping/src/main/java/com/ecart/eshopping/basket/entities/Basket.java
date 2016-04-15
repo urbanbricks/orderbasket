@@ -13,7 +13,7 @@ import com.ecart.eshopping.exception.ValidationException;
 
 public class Basket {
 	
-	protected List<BasketItem> items = new ArrayList<BasketItem>();
+	protected List<BasketItem> basketItems = new ArrayList<BasketItem>();
 	protected long basketID;
 	
 	/**
@@ -40,14 +40,24 @@ public class Basket {
 	 */
 	
 	public boolean addBasketItem(BasketItem item) {
-		return items.add(item);
+		return basketItems.add(item);
+	}
+	
+	/**
+	 * Add an Collection of Items to the basket 
+	 * @param List<BasketItem>
+	 * @return 
+	 * @throws ValidationException
+	 */
+	public boolean addBasketItem(List<BasketItem> items) {
+		return basketItems.addAll(items);
 	}
 
 	/**
 	 * Gets the list of items
 	 * @return
 	 */
-	public List<BasketItem> getListItems(){
-		return items;
+	public List<BasketItem> getItemsInBasket(){
+		return basketItems;
 	}
 }

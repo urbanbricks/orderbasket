@@ -1,6 +1,7 @@
 package com.ecart.eshopping.basket;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import com.ecart.eshopping.basket.entities.Basket;
 import com.ecart.eshopping.basket.entities.BasketItem;
@@ -23,21 +24,29 @@ public class BasketManagerImpl implements BasketManager {
      * @return
      */	
 	
-	public BigDecimal computeBasketTotal(Basket basket) {
+	public BigDecimal computeBasketTotal(final Basket basket) {
 		BigDecimal totalBasketPrice = BigDecimal.ZERO;
 		
-		if(basket == null)
-			throw new ValidationException("Basket cannot be null");
+		if(basket == null || basket.getItemsInBasket().isEmpty())
+			throw new ValidationException("Basket cannot be Null And Should have Items in it");
 		
-		for(BasketItem basketItem : basket.getListItems()){
+		for(BasketItem basketItem : basket.getItemsInBasket()){
 			if (basketItem == null)
 				throw new ValidationException("Item cannot be null");
-			if (basketItem.getPrice() == null)
-				throw new ValidationException("price cannot be null . Item name " + basketItem.getItemName());
-			BigDecimal itemTotalPrice = basketItem.getPrice().multiply(new BigDecimal(basketItem.getQuantity()));
-			totalBasketPrice = totalBasketPrice.add(itemTotalPrice);
+			ensurePriceAvailableForItem(basketItem);
+			totalBasketPrice = totalBasketPrice.add(calculatePriceForItem(basketItem));
 		}
 		return totalBasketPrice;
+	}
+
+	private BigDecimal calculatePriceForItem(final BasketItem basketItem) {
+		return  basketItem.getPrice().multiply(new BigDecimal(basketItem.getQuantity()));
+		
+	}
+
+	private void ensurePriceAvailableForItem(BasketItem basketItem) {
+		if (basketItem.getPrice() == null)
+			throw new ValidationException("price cannot be Empty for " + basketItem.getItemName());
 	}
 	
 }

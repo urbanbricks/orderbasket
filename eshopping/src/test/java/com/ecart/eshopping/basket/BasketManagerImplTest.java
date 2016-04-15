@@ -3,6 +3,7 @@ package com.ecart.eshopping.basket;
 import static org.junit.Assert.fail;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -67,15 +68,15 @@ public class BasketManagerImplTest {
 
 	}
 
-	@Test
-	public void testBasketWithNoItem() {
+	@Test(expected = ValidationException.class)
+	public void when_Basket_Is_Empty_Exception_isThrown() {
 		BasketManagerImpl basketManagerImpl = new BasketManagerImpl();
 		BigDecimal basketTotal = basketManagerImpl.computeBasketTotal(basket);
 		Assert.assertEquals(0, basketTotal.doubleValue(), 0);
 	}
 
 	@Test(expected = ValidationException.class)
-	public void testNullBasket() {
+	public void when_basket_Null_Expection_Thrown() {
 		BasketManagerImpl basketManagerImpl = new BasketManagerImpl();
 		basketManagerImpl.computeBasketTotal(null);
 
@@ -84,8 +85,7 @@ public class BasketManagerImplTest {
 	@Test(expected = ValidationException.class)
 	public void testNullItemInBasket() {
 		BasketManagerImpl basketManagerImpl = new BasketManagerImpl();
-		basket.addBasketItem(bananas);
-		basket.addBasketItem(null);
+		basket.addBasketItem(Collections.EMPTY_LIST);
 		basketManagerImpl.computeBasketTotal(basket);
 	}
 
