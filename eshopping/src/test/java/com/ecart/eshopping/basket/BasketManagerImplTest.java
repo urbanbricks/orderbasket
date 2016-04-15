@@ -41,7 +41,6 @@ public class BasketManagerImplTest {
 			basket.addBasketItem(apples);
 			BigDecimal basketTotal = basketManagerImpl.computeBasketTotal(basket);
 			Assert.assertEquals(8.58, basketTotal.doubleValue(), 0);
-			basketManagerImpl.computeBasketTotal(basket);
 		} catch (ValidationException e) {
 			fail(" Test failed due to Validation exception ");
 			e.printStackTrace();
@@ -61,7 +60,6 @@ public class BasketManagerImplTest {
 			basket.addBasketItem(apples);
 			BigDecimal basketTotal = basketManagerImpl.computeBasketTotal(basket);
 			Assert.assertEquals(12, basketTotal.doubleValue(), 0);
-			basketManagerImpl.computeBasketTotal(basket);
 		} catch (ValidationException e) {
 			fail(" Test failed due to Validation exception ");
 			e.printStackTrace();
