@@ -44,19 +44,10 @@ public class Basket {
 	
 	public boolean addBasketItem(BasketItem item) throws ValidationException {
 		if (item == null)
-			throw new ValidationException();
+			throw new ValidationException("Adding null basket Item is not allowed");
 		return items.add(item);
 	}
 
-	/**
-     * Basket quantity
-     * @return
-     */
-	
-	public long getBasketQuantity() {
-		return items.size();
-	}
-	
 	/**
 	 * Gets the list of items
 	 * @return
@@ -72,7 +63,7 @@ public class Basket {
 	public double getBasketTotal() {
 		double totalPrice =0d;
 		for(BasketItem basketItem : items){
-			totalPrice =+ basketItem.getItemPrice() * basketItem.getItemQuantity();
+			totalPrice += (basketItem.getItemPrice() * basketItem.getItemQuantity());
 		}
 		return totalPrice;
 	}
