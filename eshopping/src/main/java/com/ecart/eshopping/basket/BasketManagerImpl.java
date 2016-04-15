@@ -45,8 +45,8 @@ public class BasketManagerImpl implements BasketManager {
 	}
 
 	private void ensurePriceAvailableForItem(BasketItem basketItem) {
-		if (basketItem.getPrice() == null)
-			throw new ValidationException("price cannot be Empty for " + basketItem.getItemName());
+		if (basketItem.getPrice() == null || basketItem.getPrice() == BigDecimal.ZERO)
+			throw new ValidationException("Price should be available and Not equal to Zero " + basketItem.getItemName());
 	}
 	
 }
