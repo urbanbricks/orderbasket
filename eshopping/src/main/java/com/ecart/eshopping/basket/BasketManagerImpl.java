@@ -46,10 +46,7 @@ public class BasketManagerImpl implements BasketManager {
 
 		basketAndItemValidator.validateBasketAndBasketItemList(basket);
 		
-		Function<BasketItem, BigDecimal> f = p -> 
-											p.getPrice().multiply(new BigDecimal(p.getQuantity()));
-
-		totalBasketPrice = basket.getItemsInBasket().stream().map(f).reduce((a,c)-> a.add(c)).get();
+		totalBasketPrice = basket.getItemsInBasket().stream().map(BasketManagerImpl::calculatePriceForItem).reduce((a,c)-> a.add(c)).get();
 			
 
 		return totalBasketPrice;
@@ -62,7 +59,7 @@ public class BasketManagerImpl implements BasketManager {
 	 * @param basketItem
 	 * @return basketItem
 	 */
-	private BigDecimal calculatePriceForItem(final BasketItem basketItem) {
+	private static BigDecimal calculatePriceForItem(final BasketItem basketItem) {
 		return basketItem.getPrice().multiply(new BigDecimal(basketItem.getQuantity()));
 
 	}
