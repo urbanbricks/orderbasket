@@ -40,10 +40,30 @@ public class BasketManagerImplTest {
 			basket.addBasketItems(BasketItemsHelper.getOranges(1));
 			basket.addBasketItems(BasketItemsHelper.getLemons(1));
 			basket.addBasketItems(BasketItemsHelper.getPeaches(1));
-			BigDecimal basketTotal = basketManagerImpl.computeBasketTotal_j8(basket);
+			BigDecimal basketTotal = basketManagerImpl.computeBasketTotal(basket);
 			verify(basketAndItemValidator, times(1)).validateBasketAndBasketItemList(any(Basket.class));
 			verify(basketAndItemValidator, times(5)).validateBasketItem(any(BasketItem.class));
 			verify(basketAndItemValidator, times(5)).ensurePriceAvailableForItem(any(BasketItem.class));
+			Assert.assertEquals(14.76, basketTotal.doubleValue(), 0);
+		} catch (ValidationException e) {
+			fail(" Test failed due to Validation exception ");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Add five items to the basket and test the price calculated are expected.
+	 * The prices are default in the fruits.
+	 */
+	@Test
+	public void testCalculateBasketTotal_J8() {
+		try {
+			basket.addBasketItems(BasketItemsHelper.getBananas(1));
+			basket.addBasketItems(BasketItemsHelper.getApples(1));
+			basket.addBasketItems(BasketItemsHelper.getOranges(1));
+			basket.addBasketItems(BasketItemsHelper.getLemons(1));
+			basket.addBasketItems(BasketItemsHelper.getPeaches(1));
+			BigDecimal basketTotal = basketManagerImpl.computeBasketTotal_j8(basket);
 			Assert.assertEquals(14.76, basketTotal.doubleValue(), 0);
 		} catch (ValidationException e) {
 			fail(" Test failed due to Validation exception ");

@@ -1,6 +1,9 @@
 package com.ecart.eshopping.basket;
 
 import java.math.BigDecimal;
+import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import com.ecart.eshopping.basket.entities.Basket;
 import com.ecart.eshopping.basket.entities.BasketItem;
@@ -39,16 +42,16 @@ public class BasketManagerImpl implements BasketManager {
 	}
 	
 	public BigDecimal computeBasketTotal_j8(final Basket basket) {
-		final BigDecimal totalBasketPrice = BigDecimal.ZERO;
+		BigDecimal totalBasketPrice = BigDecimal.ZERO;
 
 		basketAndItemValidator.validateBasketAndBasketItemList(basket);
+		
+		Function<BasketItem, BigDecimal> f = p -> 
+											p.getPrice().multiply(new BigDecimal(p.getQuantity()));
 
-		basket.getItemsInBasket().forEach(b -> {
-			basketAndItemValidator.validateBasketItem(b);
-			basketAndItemValidator.ensurePriceAvailableForItem(b);
-			totalBasketPrice.add(calculatePriceForItem(b));
+		totalBasketPrice = basket.getItemsInBasket().stream().map(f).reduce((a,c)-> a.add(c)).get();
 			
-		});
+
 		return totalBasketPrice;
 	}
 	
